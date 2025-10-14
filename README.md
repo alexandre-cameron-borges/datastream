@@ -2,8 +2,7 @@
 
 ![Status](https://img.shields.io/badge/status-MVP-green) ![Kafka](https://img.shields.io/badge/stream-Kafka-black) ![Airflow](https://img.shields.io/badge/orchestrator-Airflow-blue) ![Elastic](https://img.shields.io/badge/search-Elasticsearch-005571) ![Kibana](https://img.shields.io/badge/viz-Kibana-3a3) ![GCP](https://img.shields.io/badge/datalake-GCS-1a73e8) ![BigQuery](https://img.shields.io/badge/warehouse-BigQuery-1a73e8)
 
-> Backend temps réel pour calculer la **distance** chauffeur–client, **tarifer** selon le **confort**, **visualiser** dans Kibana, et **analyser/clusteriser** dans BigQuery ML (**k-means k=8**). Exigences issues du brief de projet.
-
+> Backend temps réel pour calculer la **distance** chauffeur–client, **tarifer** selon le **confort**, **visualiser** dans Kibana, et **analyser/clusteriser** dans BigQuery ML (**k-means k=8**). 
 ---
 
 ## 1) Objectifs
