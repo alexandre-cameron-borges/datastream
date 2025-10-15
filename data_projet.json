@@ -4,7 +4,7 @@
          "confort":"standard",
          "prix_base_per_km":2,
          "properties-client":{
-            "logitude":2.3522,
+            "longitude":2.3522,
             "latitude":48.8566,
             "nomclient":"FALL",
             "telephoneClient":"060786575"
