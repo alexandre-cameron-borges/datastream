@@ -1,1 +1,104 @@
+# infra/docker-compose.yml
+services:
+  broker:
+    image: docker.redpanda.com/redpandadata/redpanda:v24.2.5
+    container_name: broker
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --node-id=0
+      - --check=false
+      - --kafka-addr=PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr=PLAINTEXT://broker:9092
+    ports: ["9092:9092"]
 
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=broker:9092
+    ports: ["8085:8080"]
+    depends_on: ["broker"]
+
+  # -------- Elasticsearch / Kibana (dev) --------
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.license.self_generated.type=basic
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ingest.geoip.downloader.enabled=false
+    ports: ["9200:9200","9300:9300"]
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ulimits:
+      memlock: { soft: -1, hard: -1 }
+      nofile:  { soft: 65536, hard: 65536 }
+    mem_limit: "2g"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.13.4
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - xpack.security.enabled=false
+    ports: ["5601:5601"]
+    depends_on: ["elasticsearch"]
+
+  # -------- Airflow (LocalExecutor) --------
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  airflow-init:
+    build: { context: ../airflow, dockerfile: Dockerfile }
+    container_name: airflow-init
+    env_file: ["../.env"]
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    entrypoint: /bin/bash
+    command: -c "airflow db init && airflow users create --role Admin --username admin --password admin --firstname Admin --lastname User --email admin@example.com"
+    depends_on: ["postgres"]
+
+  airflow-webserver:
+    build: { context: ../airflow, dockerfile: Dockerfile }
+    container_name: airflow-web
+    env_file: ["../.env"]
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    command: webserver
+    ports: ["8080:8080"]
+    depends_on: ["airflow-init","postgres"]
+
+  airflow-scheduler:
+    build: { context: ../airflow, dockerfile: Dockerfile }
+    container_name: airflow-scheduler
+    env_file: ["../.env"]
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    command: scheduler
+    depends_on: ["airflow-init","postgres"]
+
+volumes:
+  esdata:
+  pgdata:
