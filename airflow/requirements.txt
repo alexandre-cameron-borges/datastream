@@ -1,5 +1,5 @@
-kafka-python
-elasticsearch>=8.13.0
-google-cloud-storage
-apache-airflow-providers-elasticsearch
-apache-airflow-providers-google
+kafka-python==2.0.2
+elasticsearch==8.13.1
+google-cloud-storage==2.16.0
+apache-airflow-providers-elasticsearch==5.9.0
+apache-airflow-providers-google==10.15.0
