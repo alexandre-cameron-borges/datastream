@@ -101,7 +101,7 @@ python producer.py --n 1000 --rate 100    # ex: 1000 events à 100 ev/s
 
 7) **BigQuery / ML**
 - Crée **External Table** pointant sur le bucket GCS  
-- Charge le CSV client (`uber-split2.csv`) et entraîne **KMeans(k=8)** sur `longitude, latitude`  
+- Charge le CSV client (`uber.csv`) et entraîne **KMeans(k=8)** sur `longitude, latitude`  
 - Calcule le **CA par cluster × confort** (vue matérialisée / table d’agrégation)
 
 ---
