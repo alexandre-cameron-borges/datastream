@@ -68,12 +68,13 @@ services:
   airflow-init:
     image: apache/airflow:2.9.1
     container_name: airflow-init
-    env_file: ["../.env"]
+    env_file:
+      - ../.env
+      - ./Keys/fernet_key.env
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-      AIRFLOW__CORE__FERNET_KEY: B2nDx2rODkpUbsX93GbZYKQ84L1hoY4TpqagYoBGJZQ=
     entrypoint: >
       /bin/bash -c "airflow db init && airflow users create --role Admin --username admin --password admin --firstname Admin --lastname User --email admin@example.com"
     depends_on: ["postgres"]
@@ -82,12 +83,13 @@ services:
   airflow-webserver:
     image: apache/airflow:2.9.1
     container_name: airflow-web
-    env_file: ["../.env"]
+    env_file:
+      - ../.env
+      - ./Keys/fernet_key.env
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-      AIRFLOW__CORE__FERNET_KEY: B2nDx2rODkpUbsX93GbZYKQ84L1hoY4TpqagYoBGJZQ=
     command: webserver
     ports: ["8080:8080"]
     depends_on: ["airflow-init","postgres"]
@@ -96,12 +98,13 @@ services:
   airflow-scheduler:
     image: apache/airflow:2.9.1
     container_name: airflow-scheduler
-    env_file: ["../.env"]
+    env_file:
+      - ../.env
+      - ./Keys/fernet_key.env
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-      AIRFLOW__CORE__FERNET_KEY: B2nDx2rODkpUbsX93GbZYKQ84L1hoY4TpqagYoBGJZQ=
     command: scheduler
     depends_on: ["airflow-init","postgres"]
     restart: always

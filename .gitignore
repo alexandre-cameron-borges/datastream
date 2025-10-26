@@ -4,3 +4,4 @@ keys/
 airflow/keys/
 infra/airflow/keys/
 gcp-sa.json
+infra/keys/
