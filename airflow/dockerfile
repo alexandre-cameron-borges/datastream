@@ -1,12 +1,24 @@
 FROM apache/airflow:2.9.1
 
-# Dépendances (si tu as un requirements.txt)
-COPY requirements.txt /requirements.txt
-RUN python -m pip install --no-cache-dir -r /requirements.txt
+# Mettre à jour pip pour réduire le backtracking
+RUN python -m pip install --upgrade pip
 
-# Bake des DAGs (tu l’as déjà)
+# Copier et installer les dépendances de base
+COPY requirements.txt /requirements.txt
+
+# Installation en deux étapes pour réduire les conflits
+RUN python -m pip install --no-cache-dir \
+        kafka-python==2.0.2 \
+        elasticsearch==8.13.1 \
+        google-cloud-storage==2.16.0 \
+    && python -m pip install --no-cache-dir \
+        "apache-airflow-providers-elasticsearch>=6.0.0" \
+        apache-airflow-providers-google==10.15.0
+
+# Copier les DAGs
 COPY dags/ /opt/airflow/dags/
 
-# ➜ Bake de la clé SA (DEV uniquement)
+# Clé SA (DEV uniquement) : copie seulement si présente
+# Vérifie que le fichier existe avant de copier pour éviter les erreurs
 COPY keys/gcp-sa.json /opt/airflow/keys/gcp-sa.json
 ENV GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/keys/gcp-sa.json

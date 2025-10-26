@@ -1,3 +1,6 @@
 secrets/
 .env
-
+keys/
+airflow/keys/
+infra/airflow/keys/
+gcp-sa.json
