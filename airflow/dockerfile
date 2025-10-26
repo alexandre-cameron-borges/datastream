@@ -1,12 +1,17 @@
 FROM apache/airflow:2.9.1
 
-# Dépendances (si tu as un requirements.txt)
+# Mettre à jour pip
+RUN python -m pip install --upgrade pip
+
+# Dépendances Python
 COPY requirements.txt /requirements.txt
 RUN python -m pip install --no-cache-dir -r /requirements.txt
 
-# Bake des DAGs (tu l’as déjà)
+# Bake des DAGs
 COPY dags/ /opt/airflow/dags/
 
-# ➜ Bake de la clé SA (DEV uniquement)
+# ➜ Clé GCP (optionnelle pour le dev)
+# Copier uniquement si le fichier existe
 COPY keys/gcp-sa.json /opt/airflow/keys/gcp-sa.json
+# Définir la variable d'environnement uniquement si le fichier est présent
 ENV GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/keys/gcp-sa.json
