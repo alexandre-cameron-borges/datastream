@@ -1,0 +1,7 @@
+﻿{
+  "properties": {
+    "trajet": {
+      "type": "geo_shape"
+    }
+  }
+}
