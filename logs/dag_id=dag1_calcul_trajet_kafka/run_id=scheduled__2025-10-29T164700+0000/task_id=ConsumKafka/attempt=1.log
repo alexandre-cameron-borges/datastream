@@ -1,0 +1,42 @@
+[2025-10-29T16:48:00.895+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag1_calcul_trajet_kafka.ConsumKafka scheduled__2025-10-29T16:47:00+00:00 [queued]>
+[2025-10-29T16:48:00.904+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag1_calcul_trajet_kafka.ConsumKafka scheduled__2025-10-29T16:47:00+00:00 [queued]>
+[2025-10-29T16:48:00.905+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T16:48:00.919+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): ConsumKafka> on 2025-10-29 16:47:00+00:00
+[2025-10-29T16:48:00.927+0000] {standard_task_runner.py:60} INFO - Started process 1313 to run task
+[2025-10-29T16:48:00.932+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag1_calcul_trajet_kafka', 'ConsumKafka', 'scheduled__2025-10-29T16:47:00+00:00', '--job-id', '558', '--raw', '--subdir', 'DAGS_FOLDER/dag1_kafka_processing.py', '--cfg-path', '/tmp/tmpgnbyk9xl']
+[2025-10-29T16:48:00.934+0000] {standard_task_runner.py:88} INFO - Job 558: Subtask ConsumKafka
+[2025-10-29T16:48:00.987+0000] {task_command.py:423} INFO - Running <TaskInstance: dag1_calcul_trajet_kafka.ConsumKafka scheduled__2025-10-29T16:47:00+00:00 [running]> on host 46f6cfd4d166
+[2025-10-29T16:48:01.079+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag1_calcul_trajet_kafka' AIRFLOW_CTX_TASK_ID='ConsumKafka' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T16:47:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-29T16:47:00+00:00'
+[2025-10-29T16:48:01.087+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.18.0.8', 9092)]>: connecting to kafka:9092 [('172.18.0.8', 9092) IPv4]
+[2025-10-29T16:48:01.090+0000] {conn.py:618} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.18.0.8', 9092)]>: Broker version identified as 2.6
+[2025-10-29T16:48:01.091+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Connection complete.
+[2025-10-29T16:48:01.094+0000] {subscription_state.py:181} INFO - Updating subscribed topics to: ('source',)
+[2025-10-29T16:48:01.095+0000] {dag1_kafka_processing.py:49} INFO - ✅ Consommateur Kafka créé pour le topic 'source'. En attente de messages...
+[2025-10-29T16:48:01.098+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connecting> [IPv4 ('172.18.0.8', 9092)]>: connecting to kafka:9092 [('172.18.0.8', 9092) IPv4]
+[2025-10-29T16:48:01.099+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Connection complete.
+[2025-10-29T16:48:01.099+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Closing connection. 
+[2025-10-29T16:48:01.202+0000] {cluster.py:401} INFO - Coordinator for group/***-consumers-dag1 is ('coordinator-1', 'kafka', 9092, None)
+[2025-10-29T16:48:01.203+0000] {base.py:788} INFO - Discovered coordinator coordinator-1 for group ***-consumers-dag1
+[2025-10-29T16:48:01.204+0000] {base.py:848} INFO - Starting new heartbeat thread
+[2025-10-29T16:48:01.205+0000] {consumer.py:365} INFO - Revoking previously assigned partitions () for group ***-consumers-dag1
+[2025-10-29T16:48:01.206+0000] {base.py:419} INFO - Failed to join group ***-consumers-dag1: NodeNotReadyError: coordinator-1
+[2025-10-29T16:48:01.207+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connecting> [IPv4 ('172.18.0.8', 9092)]>: connecting to kafka:9092 [('172.18.0.8', 9092) IPv4]
+[2025-10-29T16:48:01.208+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Connection complete.
+[2025-10-29T16:48:01.309+0000] {base.py:532} INFO - (Re-)joining group ***-consumers-dag1
+[2025-10-29T16:48:01.312+0000] {base.py:637} INFO - Received member id kafka-python-2.2.15-0fb7318a-c493-480d-9fc2-f8a2e02c6344 for group ***-consumers-dag1; will retry join-group
+[2025-10-29T16:48:01.314+0000] {base.py:419} INFO - Failed to join group ***-consumers-dag1: [Error 79] MemberIdRequiredError
+[2025-10-29T16:48:01.315+0000] {base.py:532} INFO - (Re-)joining group ***-consumers-dag1
+[2025-10-29T16:48:04.319+0000] {base.py:594} INFO - Successfully joined group ***-consumers-dag1 <Generation 156 (member_id: kafka-python-2.2.15-0fb7318a-c493-480d-9fc2-f8a2e02c6344, protocol: range)>
+[2025-10-29T16:48:04.320+0000] {base.py:596} INFO - Elected group leader -- performing partition assignments using range
+[2025-10-29T16:48:04.324+0000] {subscription_state.py:254} INFO - Updated partition assignment: [('source', 0)]
+[2025-10-29T16:48:04.324+0000] {consumer.py:249} INFO - Setting newly assigned partitions (('source', 0),) for group ***-consumers-dag1
+[2025-10-29T16:48:04.334+0000] {dag1_kafka_processing.py:60} INFO - 📩 Message reçu : {'confort': 'hight', 'prix_base_per_km': 2, 'properties-client': {'logitude': 2.3109924688110524, 'latitude': 48.83672962501858, 'nomclient': 'FALL', 'telephoneClient': '060786575'}, 'properties-driver': {'logitude': 3.6781482868327373, 'latitude': 40.372871612068515, 'nomDriver': 'DIOP', 'telephoneDriver': '0760786575'}}
+[2025-10-29T16:48:04.337+0000] {base.py:1052} INFO - Stopping heartbeat thread
+[2025-10-29T16:48:04.338+0000] {base.py:891} INFO - Leaving consumer group (***-consumers-dag1).
+[2025-10-29T16:48:04.341+0000] {base.py:906} INFO - LeaveGroup request for group ***-consumers-dag1 returned successfully
+[2025-10-29T16:48:04.342+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Closing connection. 
+[2025-10-29T16:48:04.343+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Closing connection. 
+[2025-10-29T16:48:04.343+0000] {python.py:201} INFO - Done. Returned value was: {'confort': 'hight', 'prix_base_per_km': 2, 'properties-client': {'logitude': 2.3109924688110524, 'latitude': 48.83672962501858, 'nomclient': 'FALL', 'telephoneClient': '060786575'}, 'properties-driver': {'logitude': 3.6781482868327373, 'latitude': 40.372871612068515, 'nomDriver': 'DIOP', 'telephoneDriver': '0760786575'}}
+[2025-10-29T16:48:04.367+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag1_calcul_trajet_kafka, task_id=ConsumKafka, execution_date=20251029T164700, start_date=20251029T164800, end_date=20251029T164804
+[2025-10-29T16:48:04.399+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-29T16:48:04.425+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

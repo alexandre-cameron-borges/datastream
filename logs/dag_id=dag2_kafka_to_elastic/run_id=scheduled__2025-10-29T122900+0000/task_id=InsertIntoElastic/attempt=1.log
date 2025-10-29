@@ -1,0 +1,17 @@
+[2025-10-29T12:30:24.535+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag2_kafka_to_elastic.InsertIntoElastic scheduled__2025-10-29T12:29:00+00:00 [queued]>
+[2025-10-29T12:30:24.546+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag2_kafka_to_elastic.InsertIntoElastic scheduled__2025-10-29T12:29:00+00:00 [queued]>
+[2025-10-29T12:30:24.547+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T12:30:24.561+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): InsertIntoElastic> on 2025-10-29 12:29:00+00:00
+[2025-10-29T12:30:24.569+0000] {standard_task_runner.py:60} INFO - Started process 1324 to run task
+[2025-10-29T12:30:24.573+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag2_kafka_to_elastic', 'InsertIntoElastic', 'scheduled__2025-10-29T12:29:00+00:00', '--job-id', '151', '--raw', '--subdir', 'DAGS_FOLDER/dag2_elastic_gcs_ingestion.py', '--cfg-path', '/tmp/tmpexyzjecv']
+[2025-10-29T12:30:24.575+0000] {standard_task_runner.py:88} INFO - Job 151: Subtask InsertIntoElastic
+[2025-10-29T12:30:24.636+0000] {task_command.py:423} INFO - Running <TaskInstance: dag2_kafka_to_elastic.InsertIntoElastic scheduled__2025-10-29T12:29:00+00:00 [running]> on host b446a8114f7f
+[2025-10-29T12:30:24.747+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag2_kafka_to_elastic' AIRFLOW_CTX_TASK_ID='InsertIntoElastic' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T12:29:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-29T12:29:00+00:00'
+[2025-10-29T12:30:24.922+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/operators/python.py:216 AirflowProviderDeprecationWarning: This class is deprecated.
+            Please use `***.providers.elasticsearch.hooks.elasticsearch.ElasticsearchSQLHook`.
+[2025-10-29T12:30:24.932+0000] {base.py:83} INFO - Using connection ID 'elasticsearch_default' for task execution.
+[2025-10-29T12:30:24.935+0000] {dag2_elastic_gcs_ingestion.py:136} ERROR - ❌ Erreur lors de l'insertion dans Elasticsearch: 'ESConnection' object has no attribute 'indices'
+[2025-10-29T12:30:24.935+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-10-29T12:30:24.946+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag2_kafka_to_elastic, task_id=InsertIntoElastic, execution_date=20251029T122900, start_date=20251029T123024, end_date=20251029T123024
+[2025-10-29T12:30:24.987+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-29T12:30:25.008+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

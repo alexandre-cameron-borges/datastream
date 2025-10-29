@@ -1,0 +1,90 @@
+[2025-10-29T13:47:04.791+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T13:46:00+00:00 [queued]>
+[2025-10-29T13:47:04.800+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T13:46:00+00:00 [queued]>
+[2025-10-29T13:47:04.801+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T13:47:04.813+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): PutGCP> on 2025-10-29 13:46:00+00:00
+[2025-10-29T13:47:04.822+0000] {standard_task_runner.py:60} INFO - Started process 239 to run task
+[2025-10-29T13:47:04.827+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag2_kafka_elastic_gcs', 'PutGCP', 'scheduled__2025-10-29T13:46:00+00:00', '--job-id', '96', '--raw', '--subdir', 'DAGS_FOLDER/dag2_elastic_gcs_ingestion.py', '--cfg-path', '/tmp/tmpkci0a4xa']
+[2025-10-29T13:47:04.831+0000] {standard_task_runner.py:88} INFO - Job 96: Subtask PutGCP
+[2025-10-29T13:47:04.902+0000] {task_command.py:423} INFO - Running <TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T13:46:00+00:00 [running]> on host c91e5c2c38a7
+[2025-10-29T13:47:05.012+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag2_kafka_elastic_gcs' AIRFLOW_CTX_TASK_ID='PutGCP' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T13:46:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-29T13:46:00+00:00'
+[2025-10-29T13:47:05.024+0000] {connection.py:234} WARNING - Connection schemes (type: google_cloud_platform) shall not contain '_' according to RFC3986.
+[2025-10-29T13:47:05.026+0000] {base.py:83} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2025-10-29T13:47:05.542+0000] {gcs.py:510} ERROR - Upload attempt of object: rides/20251029T134705.json from rides/20251029T134705.json has failed. Attempt: 1, max 1.
+[2025-10-29T13:47:05.544+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/storage/blob.py", line 2607, in _prep_and_do_upload
+    created_json = self._do_upload(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/storage/blob.py", line 2413, in _do_upload
+    response = self._do_multipart_upload(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/storage/blob.py", line 1926, in _do_multipart_upload
+    response = upload.transmit(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/resumable_media/requests/upload.py", line 153, in transmit
+    return _request_helpers.wait_and_retry(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/resumable_media/requests/_request_helpers.py", line 155, in wait_and_retry
+    response = func()
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/resumable_media/requests/upload.py", line 149, in retriable_request
+    self._process_response(result)
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/resumable_media/_upload.py", line 125, in _process_response
+    _helpers.require_status_code(response, (http.client.OK,), self._get_status_code)
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/resumable_media/_helpers.py", line 108, in require_status_code
+    raise common.InvalidResponse(
+google.resumable_media.common.InvalidResponse: ('Request failed with status code', 403, 'Expected one of', 200)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/decorators/base.py", line 241, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag2_elastic_gcs_ingestion.py", line 118, in put_gcs
+    gcs_hook.upload(bucket_name=GCS_BUCKET, object_name=file_name, data=json_data)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/hooks/gcs.py", line 567, in upload
+    _call_with_retry(partial(blob.upload_from_string, data, content_type=mime_type, timeout=timeout))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/hooks/gcs.py", line 517, in _call_with_retry
+    raise e
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/google/cloud/hooks/gcs.py", line 507, in _call_with_retry
+    f()
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/storage/blob.py", line 3059, in upload_from_string
+    self.upload_from_file(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/storage/blob.py", line 2766, in upload_from_file
+    self._prep_and_do_upload(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/storage/blob.py", line 2625, in _prep_and_do_upload
+    _raise_from_invalid_response(exc)
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/storage/blob.py", line 4791, in _raise_from_invalid_response
+    raise exceptions.from_http_status(response.status_code, message, response=response)
+google.api_core.exceptions.Forbidden: 403 POST https://storage.googleapis.com/upload/storage/v1/b/taxi-streaming-bucket/o?uploadType=multipart: {
+  "error": {
+    "code": 403,
+    "message": "laye-sda@laye-sda.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist).",
+    "errors": [
+      {
+        "message": "laye-sda@laye-sda.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist).",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 403, 'Expected one of', <HTTPStatus.OK: 200>)
+[2025-10-29T13:47:05.559+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dag2_kafka_elastic_gcs, task_id=PutGCP, execution_date=20251029T134600, start_date=20251029T134704, end_date=20251029T134705
+[2025-10-29T13:47:05.575+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 96 for task PutGCP (403 POST https://storage.googleapis.com/upload/storage/v1/b/taxi-streaming-bucket/o?uploadType=multipart: {
+  "error": {
+    "code": 403,
+    "message": "laye-sda@laye-sda.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist).",
+    "errors": [
+      {
+        "message": "laye-sda@laye-sda.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist).",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 403, 'Expected one of', <HTTPStatus.OK: 200>); 239)
+[2025-10-29T13:47:05.609+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-10-29T13:47:05.629+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

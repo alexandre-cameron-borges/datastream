@@ -1,0 +1,14 @@
+[2025-10-28T23:34:56.590+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag2_elastic_gcs_ingestion.TransFormJson manual__2025-10-28T23:34:44.948447+00:00 [queued]>
+[2025-10-28T23:34:56.600+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag2_elastic_gcs_ingestion.TransFormJson manual__2025-10-28T23:34:44.948447+00:00 [queued]>
+[2025-10-28T23:34:56.601+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-28T23:34:56.619+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): TransFormJson> on 2025-10-28 23:34:44.948447+00:00
+[2025-10-28T23:34:56.629+0000] {standard_task_runner.py:60} INFO - Started process 225 to run task
+[2025-10-28T23:34:56.634+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag2_elastic_gcs_ingestion', 'TransFormJson', 'manual__2025-10-28T23:34:44.948447+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/dag2_elastic_gcs_ingestion.py', '--cfg-path', '/tmp/tmpitjt8en7']
+[2025-10-28T23:34:56.637+0000] {standard_task_runner.py:88} INFO - Job 10: Subtask TransFormJson
+[2025-10-28T23:34:56.703+0000] {task_command.py:423} INFO - Running <TaskInstance: dag2_elastic_gcs_ingestion.TransFormJson manual__2025-10-28T23:34:44.948447+00:00 [running]> on host 9680281a20bc
+[2025-10-28T23:34:56.811+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag2_elastic_gcs_ingestion' AIRFLOW_CTX_TASK_ID='TransFormJson' AIRFLOW_CTX_EXECUTION_DATE='2025-10-28T23:34:44.948447+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-10-28T23:34:44.948447+00:00'
+[2025-10-28T23:34:56.813+0000] {dag2_elastic_gcs_ingestion.py:58} INFO - Aucune donnée à transformer.
+[2025-10-28T23:34:56.814+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-10-28T23:34:56.823+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag2_elastic_gcs_ingestion, task_id=TransFormJson, execution_date=20251028T233444, start_date=20251028T233456, end_date=20251028T233456
+[2025-10-28T23:34:56.886+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-28T23:34:56.912+0000] {taskinstance.py:3280} INFO - 2 downstream tasks scheduled from follow-on schedule check

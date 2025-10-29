@@ -1,0 +1,51 @@
+[2025-10-28T23:34:44.421+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag2_elastic_gcs_ingestion.ConsumKafkaResult scheduled__2025-10-28T23:33:00+00:00 [queued]>
+[2025-10-28T23:34:44.432+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag2_elastic_gcs_ingestion.ConsumKafkaResult scheduled__2025-10-28T23:33:00+00:00 [queued]>
+[2025-10-28T23:34:44.434+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-28T23:34:44.452+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): ConsumKafkaResult> on 2025-10-28 23:33:00+00:00
+[2025-10-28T23:34:44.462+0000] {standard_task_runner.py:60} INFO - Started process 208 to run task
+[2025-10-28T23:34:44.467+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag2_elastic_gcs_ingestion', 'ConsumKafkaResult', 'scheduled__2025-10-28T23:33:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/dag2_elastic_gcs_ingestion.py', '--cfg-path', '/tmp/tmpybh9fkkv']
+[2025-10-28T23:34:44.470+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask ConsumKafkaResult
+[2025-10-28T23:34:44.537+0000] {task_command.py:423} INFO - Running <TaskInstance: dag2_elastic_gcs_ingestion.ConsumKafkaResult scheduled__2025-10-28T23:33:00+00:00 [running]> on host 9680281a20bc
+[2025-10-28T23:34:44.625+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag2_elastic_gcs_ingestion' AIRFLOW_CTX_TASK_ID='ConsumKafkaResult' AIRFLOW_CTX_EXECUTION_DATE='2025-10-28T23:33:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-28T23:33:00+00:00'
+[2025-10-28T23:34:44.631+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.18.0.5', 9092)]>: connecting to kafka:9092 [('172.18.0.5', 9092) IPv4]
+[2025-10-28T23:34:44.637+0000] {conn.py:618} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.18.0.5', 9092)]>: Broker version identified as 2.6
+[2025-10-28T23:34:44.637+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Connection complete.
+[2025-10-28T23:34:44.639+0000] {subscription_state.py:181} INFO - Updating subscribed topics to: ('result',)
+[2025-10-28T23:34:44.640+0000] {dag2_elastic_gcs_ingestion.py:41} INFO - Consommateur Kafka créé pour le topic 'result'. En attente de messages...
+[2025-10-28T23:34:44.658+0000] {cluster.py:313} WARNING - Topic result is not available during auto-create initialization
+[2025-10-28T23:34:44.661+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connecting> [IPv4 ('172.18.0.5', 9092)]>: connecting to kafka:9092 [('172.18.0.5', 9092) IPv4]
+[2025-10-28T23:34:44.662+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Connection complete.
+[2025-10-28T23:34:44.664+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Closing connection. 
+[2025-10-28T23:34:44.767+0000] {cluster.py:401} INFO - Coordinator for group/***-consumers-dag2 is ('coordinator-1', 'kafka', 9092, None)
+[2025-10-28T23:34:44.768+0000] {base.py:788} INFO - Discovered coordinator coordinator-1 for group ***-consumers-dag2
+[2025-10-28T23:34:44.768+0000] {base.py:848} INFO - Starting new heartbeat thread
+[2025-10-28T23:34:44.769+0000] {consumer.py:365} INFO - Revoking previously assigned partitions () for group ***-consumers-dag2
+[2025-10-28T23:34:44.770+0000] {base.py:419} INFO - Failed to join group ***-consumers-dag2: NodeNotReadyError: coordinator-1
+[2025-10-28T23:34:44.771+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connecting> [IPv4 ('172.18.0.5', 9092)]>: connecting to kafka:9092 [('172.18.0.5', 9092) IPv4]
+[2025-10-28T23:34:44.773+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Connection complete.
+[2025-10-28T23:34:44.874+0000] {base.py:532} INFO - (Re-)joining group ***-consumers-dag2
+[2025-10-28T23:34:44.879+0000] {base.py:637} INFO - Received member id kafka-python-2.2.15-6db47474-4341-4aee-9fed-8e19f827709d for group ***-consumers-dag2; will retry join-group
+[2025-10-28T23:34:44.880+0000] {base.py:419} INFO - Failed to join group ***-consumers-dag2: [Error 79] MemberIdRequiredError
+[2025-10-28T23:34:44.880+0000] {base.py:532} INFO - (Re-)joining group ***-consumers-dag2
+[2025-10-28T23:34:50.888+0000] {base.py:594} INFO - Successfully joined group ***-consumers-dag2 <Generation 1 (member_id: kafka-python-2.2.15-6db47474-4341-4aee-9fed-8e19f827709d, protocol: range)>
+[2025-10-28T23:34:50.889+0000] {base.py:596} INFO - Elected group leader -- performing partition assignments using range
+[2025-10-28T23:34:50.890+0000] {range.py:47} WARNING - No partition metadata for topic result
+[2025-10-28T23:34:50.896+0000] {subscription_state.py:254} INFO - Updated partition assignment: []
+[2025-10-28T23:34:50.896+0000] {consumer.py:249} INFO - Setting newly assigned partitions () for group ***-consumers-dag2
+[2025-10-28T23:34:53.900+0000] {consumer.py:365} INFO - Revoking previously assigned partitions () for group ***-consumers-dag2
+[2025-10-28T23:34:53.902+0000] {base.py:532} INFO - (Re-)joining group ***-consumers-dag2
+[2025-10-28T23:34:54.640+0000] {base.py:1052} INFO - Stopping heartbeat thread
+[2025-10-28T23:34:54.642+0000] {base.py:891} INFO - Leaving consumer group (***-consumers-dag2).
+[2025-10-28T23:34:56.006+0000] {base.py:594} INFO - Successfully joined group ***-consumers-dag2 <Generation 2 (member_id: kafka-python-2.2.15-6db47474-4341-4aee-9fed-8e19f827709d, protocol: range)>
+[2025-10-28T23:34:56.008+0000] {base.py:596} INFO - Elected group leader -- performing partition assignments using range
+[2025-10-28T23:34:56.014+0000] {base.py:906} INFO - LeaveGroup request for group ***-consumers-dag2 returned successfully
+[2025-10-28T23:34:56.015+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Closing connection. 
+[2025-10-28T23:34:56.016+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>: Closing connection. 
+[2025-10-28T23:34:56.017+0000] {base.py:569} ERROR - Error sending SyncGroupRequest_v2 to node coordinator-1 [Cancelled: <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>]
+[2025-10-28T23:34:56.018+0000] {base.py:810} WARNING - Marking the coordinator dead (node coordinator-1) for group ***-consumers-dag2: Cancelled: <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>.
+[2025-10-28T23:34:56.018+0000] {base.py:419} INFO - Failed to join group ***-consumers-dag2: Cancelled: <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-1 host=kafka:9092 <connected> [IPv4 ('172.18.0.5', 9092)]>
+[2025-10-28T23:34:56.019+0000] {dag2_elastic_gcs_ingestion.py:47} WARNING - Aucun message reçu du topic 'result'. Le DAG s'arrêtera.
+[2025-10-28T23:34:56.019+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-10-28T23:34:56.222+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag2_elastic_gcs_ingestion, task_id=ConsumKafkaResult, execution_date=20251028T233300, start_date=20251028T233444, end_date=20251028T233456
+[2025-10-28T23:34:56.301+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-28T23:34:56.331+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

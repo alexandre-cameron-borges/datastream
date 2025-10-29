@@ -1,0 +1,22 @@
+[2025-10-29T15:35:06.973+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag1_calcul_trajet_kafka.PublishKafka scheduled__2025-10-29T15:34:00+00:00 [queued]>
+[2025-10-29T15:35:06.984+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag1_calcul_trajet_kafka.PublishKafka scheduled__2025-10-29T15:34:00+00:00 [queued]>
+[2025-10-29T15:35:06.985+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T15:35:06.998+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): PublishKafka> on 2025-10-29 15:34:00+00:00
+[2025-10-29T15:35:07.006+0000] {standard_task_runner.py:60} INFO - Started process 133 to run task
+[2025-10-29T15:35:07.009+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag1_calcul_trajet_kafka', 'PublishKafka', 'scheduled__2025-10-29T15:34:00+00:00', '--job-id', '39', '--raw', '--subdir', 'DAGS_FOLDER/dag1_kafka_processing.py', '--cfg-path', '/tmp/tmp0l8j_ht4']
+[2025-10-29T15:35:07.011+0000] {standard_task_runner.py:88} INFO - Job 39: Subtask PublishKafka
+[2025-10-29T15:35:07.069+0000] {task_command.py:423} INFO - Running <TaskInstance: dag1_calcul_trajet_kafka.PublishKafka scheduled__2025-10-29T15:34:00+00:00 [running]> on host 46f6cfd4d166
+[2025-10-29T15:35:07.174+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag1_calcul_trajet_kafka' AIRFLOW_CTX_TASK_ID='PublishKafka' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T15:34:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-29T15:34:00+00:00'
+[2025-10-29T15:35:07.179+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.18.0.8', 9092)]>: connecting to kafka:9092 [('172.18.0.8', 9092) IPv4]
+[2025-10-29T15:35:07.183+0000] {conn.py:618} INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.18.0.8', 9092)]>: Broker version identified as 2.6
+[2025-10-29T15:35:07.183+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Connection complete.
+[2025-10-29T15:35:07.290+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:9092 <connecting> [IPv4 ('172.18.0.8', 9092)]>: connecting to kafka:9092 [('172.18.0.8', 9092) IPv4]
+[2025-10-29T15:35:07.291+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Connection complete.
+[2025-10-29T15:35:07.292+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Closing connection. 
+[2025-10-29T15:35:07.298+0000] {kafka.py:629} INFO - <KafkaProducer client_id=kafka-python-producer-1 transactional_id=None>: Closing the Kafka producer with 9223372036.0 secs timeout.
+[2025-10-29T15:35:07.299+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.8', 9092)]>: Closing connection. 
+[2025-10-29T15:35:07.300+0000] {dag1_kafka_processing.py:104} INFO - 📤 Message publié dans 'result' : {'confort': 'standard', 'prix_base_per_km': 2, 'properties-client': {'logitude': 2.321379158375324, 'latitude': 48.86595563826786, 'nomclient': 'FALL', 'telephoneClient': '060786575'}, 'properties-driver': {'logitude': 3.675012218564054, 'latitude': 40.43623686996155, 'nomDriver': 'DIOP', 'telephoneDriver': '0760786575'}, 'distance_km': 943.39, 'travel_cost': 1886.79}
+[2025-10-29T15:35:07.301+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-10-29T15:35:07.310+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag1_calcul_trajet_kafka, task_id=PublishKafka, execution_date=20251029T153400, start_date=20251029T153506, end_date=20251029T153507
+[2025-10-29T15:35:07.343+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-29T15:35:07.364+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

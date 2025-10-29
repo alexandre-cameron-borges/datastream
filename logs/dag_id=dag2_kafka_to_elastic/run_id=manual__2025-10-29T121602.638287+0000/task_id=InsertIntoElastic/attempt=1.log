@@ -1,0 +1,14 @@
+[2025-10-29T12:16:15.823+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag2_kafka_to_elastic.InsertIntoElastic manual__2025-10-29T12:16:02.638287+00:00 [queued]>
+[2025-10-29T12:16:15.832+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag2_kafka_to_elastic.InsertIntoElastic manual__2025-10-29T12:16:02.638287+00:00 [queued]>
+[2025-10-29T12:16:15.833+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T12:16:15.848+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): InsertIntoElastic> on 2025-10-29 12:16:02.638287+00:00
+[2025-10-29T12:16:15.856+0000] {standard_task_runner.py:60} INFO - Started process 790 to run task
+[2025-10-29T12:16:15.860+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag2_kafka_to_elastic', 'InsertIntoElastic', 'manual__2025-10-29T12:16:02.638287+00:00', '--job-id', '79', '--raw', '--subdir', 'DAGS_FOLDER/dag2_elastic_gcs_ingestion.py', '--cfg-path', '/tmp/tmpkki2jkxp']
+[2025-10-29T12:16:15.863+0000] {standard_task_runner.py:88} INFO - Job 79: Subtask InsertIntoElastic
+[2025-10-29T12:16:15.920+0000] {task_command.py:423} INFO - Running <TaskInstance: dag2_kafka_to_elastic.InsertIntoElastic manual__2025-10-29T12:16:02.638287+00:00 [running]> on host b446a8114f7f
+[2025-10-29T12:16:16.025+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag2_kafka_to_elastic' AIRFLOW_CTX_TASK_ID='InsertIntoElastic' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T12:16:02.638287+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-10-29T12:16:02.638287+00:00'
+[2025-10-29T12:16:16.027+0000] {dag2_elastic_gcs_ingestion.py:98} WARNING - Aucune donnée reçue pour insertion.
+[2025-10-29T12:16:16.027+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-10-29T12:16:16.036+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag2_kafka_to_elastic, task_id=InsertIntoElastic, execution_date=20251029T121602, start_date=20251029T121615, end_date=20251029T121616
+[2025-10-29T12:16:16.274+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-29T12:16:16.293+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,164 @@
+version: "3.8"
+
+services:
+  # 🦓 Zookeeper
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  # 🦋 Kafka
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    container_name: projet_big_data_streaming-kafka-1
+    depends_on:
+      - zookeeper
+    ports:
+      - "9093:9093"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      # 👇 Interne Docker + externe
+      KAFKA_LISTENERS: PLAINTEXT://:9092,PLAINTEXT_HOST://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  # 🐘 PostgreSQL (base Airflow)
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+
+  # 🔴 Redis (broker Celery)
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  # ⚙️ Initialisation Airflow
+  airflow-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
+      - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql+psycopg2://airflow:airflow@postgres/airflow
+    command: >
+      bash -c "
+        airflow db init &&
+        airflow users create --username admin --password admin --firstname Anonymous --lastname User --role Admin --email admin@example.org
+      "
+
+  # 🌐 Airflow Webserver
+  airflow-webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+      - airflow-cli
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./plugins:/opt/airflow/plugins
+      - ./logs:/opt/airflow/logs
+      - ./airflow/laye-sda-5a8d14a4a3af.json:/opt/airflow/laye-sda-5a8d14a4a3af.json
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
+      - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW_CONN_KAFKA_DEFAULT=kafka://kafka:9092
+      # 🔧 Connexion à ton cluster Elasticsearch distant
+      - AIRFLOW_CONN_ELASTICSEARCH_DEFAULT=http://elastic:changeme@clustersdaelatsic.eastus.cloudapp.azure.com:9200
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/laye-sda-5a8d14a4a3af.json
+    command: airflow webserver
+
+  # 🕓 Airflow Scheduler
+  airflow-scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+      - airflow-cli
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./plugins:/opt/airflow/plugins
+      - ./logs:/opt/airflow/logs
+      - ./airflow/laye-sda-5a8d14a4a3af.json:/opt/airflow/laye-sda-5a8d14a4a3af.json
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
+      - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW_CONN_KAFKA_DEFAULT=kafka://kafka:9092
+      - AIRFLOW_CONN_ELASTICSEARCH_DEFAULT=http://elastic:changeme@clustersdaelatsic.eastus.cloudapp.azure.com:9200
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/laye-sda-5a8d14a4a3af.json
+    command: airflow scheduler
+
+  # ⚙️ Airflow Worker (Celery)
+  airflow-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+      - airflow-cli
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./plugins:/opt/airflow/plugins
+      - ./logs:/opt/airflow/logs
+      - ./airflow/laye-sda-5a8d14a4a3af.json:/opt/airflow/laye-sda-5a8d14a4a3af.json
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=CeleryExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0
+      - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW_CONN_KAFKA_DEFAULT=kafka://kafka:9092
+      - AIRFLOW_CONN_ELASTICSEARCH_DEFAULT=http://elastic:changeme@clustersdaelatsic.eastus.cloudapp.azure.com:9200
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/laye-sda-5a8d14a4a3af.json
+    command: airflow celery worker
+
+  # 🔍 Kibana (optionnel, pour Elasticsearch local)
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.14.3
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+
+  # 🔎 Elasticsearch local (non utilisé si tu connectes ton cluster Azure)
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    ports:
+      - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+
+volumes:
+  es-data:

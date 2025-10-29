@@ -1,0 +1,2 @@
+[2025-10-29T18:32:24.290+0000] {taskinstance.py:1946} INFO - Dependencies not met for <TaskInstance: dag2_kafka_elastic_gcs.ConsumeKafka scheduled__2025-10-29T17:41:00+00:00 [failed]>, dependency 'Task Instance State' FAILED: Task is in the 'failed' state.
+[2025-10-29T18:32:24.303+0000] {local_task_job_runner.py:160} INFO - Task is not able to be run

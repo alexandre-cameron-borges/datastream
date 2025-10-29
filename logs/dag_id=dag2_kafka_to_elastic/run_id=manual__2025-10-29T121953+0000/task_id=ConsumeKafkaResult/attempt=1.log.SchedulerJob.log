@@ -1,0 +1,1 @@
+[2025-10-29T12:19:55.528+0000] {scheduler_job_runner.py:781} ERROR - Executor reports task instance <TaskInstance: dag2_kafka_to_elastic.ConsumeKafkaResult manual__2025-10-29T12:19:53+00:00 [queued]> finished (failed) although the task says it's queued. (Info: None) Was the task killed externally?

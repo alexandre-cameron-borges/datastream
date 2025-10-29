@@ -1,0 +1,25 @@
+[2025-10-29T12:26:01.062+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag2_kafka_to_elastic.ConsumeKafkaResult scheduled__2025-10-29T12:25:00+00:00 [queued]>
+[2025-10-29T12:26:01.073+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag2_kafka_to_elastic.ConsumeKafkaResult scheduled__2025-10-29T12:25:00+00:00 [queued]>
+[2025-10-29T12:26:01.074+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T12:26:01.089+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): ConsumeKafkaResult> on 2025-10-29 12:25:00+00:00
+[2025-10-29T12:26:01.098+0000] {standard_task_runner.py:60} INFO - Started process 1124 to run task
+[2025-10-29T12:26:01.105+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag2_kafka_to_elastic', 'ConsumeKafkaResult', 'scheduled__2025-10-29T12:25:00+00:00', '--job-id', '120', '--raw', '--subdir', 'DAGS_FOLDER/dag2_elastic_gcs_ingestion.py', '--cfg-path', '/tmp/tmphyp537vr']
+[2025-10-29T12:26:01.109+0000] {standard_task_runner.py:88} INFO - Job 120: Subtask ConsumeKafkaResult
+[2025-10-29T12:26:01.176+0000] {task_command.py:423} INFO - Running <TaskInstance: dag2_kafka_to_elastic.ConsumeKafkaResult scheduled__2025-10-29T12:25:00+00:00 [running]> on host b446a8114f7f
+[2025-10-29T12:26:01.277+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag2_kafka_to_elastic' AIRFLOW_CTX_TASK_ID='ConsumeKafkaResult' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T12:25:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-29T12:25:00+00:00'
+[2025-10-29T12:26:01.279+0000] {dag2_elastic_gcs_ingestion.py:48} INFO - 📥 Démarrage de la consommation du topic Kafka 'result'...
+[2025-10-29T12:26:01.282+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connecting> [IPv4 ('172.18.0.3', 9092)]>: connecting to kafka:9092 [('172.18.0.3', 9092) IPv4]
+[2025-10-29T12:26:01.289+0000] {conn.py:618} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <checking_api_versions_recv> [IPv4 ('172.18.0.3', 9092)]>: Broker version identified as 2.6
+[2025-10-29T12:26:01.289+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.3', 9092)]>: Connection complete.
+[2025-10-29T12:26:01.292+0000] {subscription_state.py:181} INFO - Updating subscribed topics to: ('result',)
+[2025-10-29T12:26:01.294+0000] {subscription_state.py:254} INFO - Updated partition assignment: [('result', 0)]
+[2025-10-29T12:26:01.296+0000] {conn.py:396} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connecting> [IPv4 ('172.18.0.3', 9092)]>: connecting to kafka:9092 [('172.18.0.3', 9092) IPv4]
+[2025-10-29T12:26:01.296+0000] {conn.py:457} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.3', 9092)]>: Connection complete.
+[2025-10-29T12:26:01.297+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka:9092 <connected> [IPv4 ('172.18.0.3', 9092)]>: Closing connection. 
+[2025-10-29T12:26:01.523+0000] {fetcher.py:418} INFO - Resetting offset for partition ('result', 0) to offset 0.
+[2025-10-29T12:26:01.530+0000] {conn.py:945} INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=1 host=kafka:9092 <connected> [IPv4 ('172.18.0.3', 9092)]>: Closing connection. 
+[2025-10-29T12:26:01.531+0000] {dag2_elastic_gcs_ingestion.py:59} INFO - ✅ Message consommé depuis Kafka: {'confort': 'standard', 'prix_base_per_km': 2, 'properties-client': {'logitude': 2.4003142830161734, 'latitude': 48.88972666176207, 'nomclient': 'FALL', 'telephoneClient': '060786575'}, 'properties-driver': {'logitude': 3.664499017944634, 'latitude': 40.382170726291434, 'nomDriver': 'DIOP', 'telephoneDriver': '0760786575'}, 'distance_km': 951.23, 'travel_cost': 1902.47}
+[2025-10-29T12:26:01.531+0000] {python.py:201} INFO - Done. Returned value was: {'confort': 'standard', 'prix_base_per_km': 2, 'properties-client': {'logitude': 2.4003142830161734, 'latitude': 48.88972666176207, 'nomclient': 'FALL', 'telephoneClient': '060786575'}, 'properties-driver': {'logitude': 3.664499017944634, 'latitude': 40.382170726291434, 'nomDriver': 'DIOP', 'telephoneDriver': '0760786575'}, 'distance_km': 951.23, 'travel_cost': 1902.47}
+[2025-10-29T12:26:01.564+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag2_kafka_to_elastic, task_id=ConsumeKafkaResult, execution_date=20251029T122500, start_date=20251029T122601, end_date=20251029T122601
+[2025-10-29T12:26:01.639+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-29T12:26:01.669+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

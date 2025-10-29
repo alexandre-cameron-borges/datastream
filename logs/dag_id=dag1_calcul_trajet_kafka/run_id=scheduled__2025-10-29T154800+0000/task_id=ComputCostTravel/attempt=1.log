@@ -1,0 +1,14 @@
+[2025-10-29T15:49:06.220+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag1_calcul_trajet_kafka.ComputCostTravel scheduled__2025-10-29T15:48:00+00:00 [queued]>
+[2025-10-29T15:49:06.237+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag1_calcul_trajet_kafka.ComputCostTravel scheduled__2025-10-29T15:48:00+00:00 [queued]>
+[2025-10-29T15:49:06.238+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T15:49:06.256+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): ComputCostTravel> on 2025-10-29 15:48:00+00:00
+[2025-10-29T15:49:06.264+0000] {standard_task_runner.py:60} INFO - Started process 355 to run task
+[2025-10-29T15:49:06.269+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag1_calcul_trajet_kafka', 'ComputCostTravel', 'scheduled__2025-10-29T15:48:00+00:00', '--job-id', '136', '--raw', '--subdir', 'DAGS_FOLDER/dag1_kafka_processing.py', '--cfg-path', '/tmp/tmpchij03or']
+[2025-10-29T15:49:06.272+0000] {standard_task_runner.py:88} INFO - Job 136: Subtask ComputCostTravel
+[2025-10-29T15:49:06.339+0000] {task_command.py:423} INFO - Running <TaskInstance: dag1_calcul_trajet_kafka.ComputCostTravel scheduled__2025-10-29T15:48:00+00:00 [running]> on host 46f6cfd4d166
+[2025-10-29T15:49:06.479+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag1_calcul_trajet_kafka' AIRFLOW_CTX_TASK_ID='ComputCostTravel' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T15:48:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-29T15:48:00+00:00'
+[2025-10-29T15:49:06.481+0000] {dag1_kafka_processing.py:91} INFO - ✅ Calcul effectué : distance=944.19 km, coût=1888.39 €
+[2025-10-29T15:49:06.482+0000] {python.py:201} INFO - Done. Returned value was: {'confort': 'standard', 'prix_base_per_km': 2, 'properties-client': {'logitude': 2.3969173414412497, 'latitude': 48.80752640201409, 'nomclient': 'FALL', 'telephoneClient': '060786575'}, 'properties-driver': {'logitude': 3.7462175476630915, 'latitude': 40.37034149533402, 'nomDriver': 'DIOP', 'telephoneDriver': '0760786575'}, 'distance_km': 944.19, 'travel_cost': 1888.39}
+[2025-10-29T15:49:06.511+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag1_calcul_trajet_kafka, task_id=ComputCostTravel, execution_date=20251029T154800, start_date=20251029T154906, end_date=20251029T154906
+[2025-10-29T15:49:06.565+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-29T15:49:06.591+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

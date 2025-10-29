@@ -1,0 +1,30 @@
+[2025-10-29T13:30:24.077+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T13:28:00+00:00 [queued]>
+[2025-10-29T13:30:24.087+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T13:28:00+00:00 [queued]>
+[2025-10-29T13:30:24.087+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T13:30:24.100+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): PutGCP> on 2025-10-29 13:28:00+00:00
+[2025-10-29T13:30:24.107+0000] {standard_task_runner.py:60} INFO - Started process 351 to run task
+[2025-10-29T13:30:24.111+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag2_kafka_elastic_gcs', 'PutGCP', 'scheduled__2025-10-29T13:28:00+00:00', '--job-id', '35', '--raw', '--subdir', 'DAGS_FOLDER/dag2_elastic_gcs_ingestion.py', '--cfg-path', '/tmp/tmpes_duuq8']
+[2025-10-29T13:30:24.113+0000] {standard_task_runner.py:88} INFO - Job 35: Subtask PutGCP
+[2025-10-29T13:30:24.171+0000] {task_command.py:423} INFO - Running <TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T13:28:00+00:00 [running]> on host c91e5c2c38a7
+[2025-10-29T13:30:24.273+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag2_kafka_elastic_gcs' AIRFLOW_CTX_TASK_ID='PutGCP' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T13:28:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-29T13:28:00+00:00'
+[2025-10-29T13:30:24.285+0000] {connection.py:234} WARNING - Connection schemes (type: google_cloud_platform) shall not contain '_' according to RFC3986.
+[2025-10-29T13:30:24.287+0000] {base.py:83} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2025-10-29T13:30:25.167+0000] {gcs.py:510} ERROR - Upload attempt of object: data/kafka_result_20251029_133024.json from data/kafka_result_20251029_133024.json has failed. Attempt: 1, max 1.
+[2025-10-29T13:30:25.168+0000] {dag2_elastic_gcs_ingestion.py:151} ERROR - ❌ Erreur lors de l’envoi vers GCS : 403 POST https://storage.googleapis.com/upload/storage/v1/b/taxi-streaming-bucket/o?uploadType=multipart: {
+  "error": {
+    "code": 403,
+    "message": "laye-sda@laye-sda.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist).",
+    "errors": [
+      {
+        "message": "laye-sda@laye-sda.iam.gserviceaccount.com does not have storage.objects.create access to the Google Cloud Storage object. Permission 'storage.objects.create' denied on resource (or it may not exist).",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ]
+  }
+}
+: ('Request failed with status code', 403, 'Expected one of', <HTTPStatus.OK: 200>)
+[2025-10-29T13:30:25.168+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-10-29T13:30:25.178+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag2_kafka_elastic_gcs, task_id=PutGCP, execution_date=20251029T132800, start_date=20251029T133024, end_date=20251029T133025
+[2025-10-29T13:30:25.209+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-29T13:30:25.230+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

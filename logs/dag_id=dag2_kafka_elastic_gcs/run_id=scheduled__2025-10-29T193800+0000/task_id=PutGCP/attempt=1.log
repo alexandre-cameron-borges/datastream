@@ -1,0 +1,18 @@
+[2025-10-29T19:39:05.891+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T19:38:00+00:00 [queued]>
+[2025-10-29T19:39:05.898+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T19:38:00+00:00 [queued]>
+[2025-10-29T19:39:05.899+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-10-29T19:39:05.912+0000] {taskinstance.py:2191} INFO - Executing <Task(_PythonDecoratedOperator): PutGCP> on 2025-10-29 19:38:00+00:00
+[2025-10-29T19:39:05.919+0000] {standard_task_runner.py:60} INFO - Started process 2696 to run task
+[2025-10-29T19:39:05.925+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dag2_kafka_elastic_gcs', 'PutGCP', 'scheduled__2025-10-29T19:38:00+00:00', '--job-id', '1161', '--raw', '--subdir', 'DAGS_FOLDER/dag2_elastic_gcs_ingestion.py', '--cfg-path', '/tmp/tmp8wn_6g1b']
+[2025-10-29T19:39:05.929+0000] {standard_task_runner.py:88} INFO - Job 1161: Subtask PutGCP
+[2025-10-29T19:39:05.999+0000] {task_command.py:423} INFO - Running <TaskInstance: dag2_kafka_elastic_gcs.PutGCP scheduled__2025-10-29T19:38:00+00:00 [running]> on host 46f6cfd4d166
+[2025-10-29T19:39:06.106+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag2_kafka_elastic_gcs' AIRFLOW_CTX_TASK_ID='PutGCP' AIRFLOW_CTX_EXECUTION_DATE='2025-10-29T19:38:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-10-29T19:38:00+00:00'
+[2025-10-29T19:39:06.121+0000] {connection.py:234} WARNING - Connection schemes (type: google_cloud_platform) shall not contain '_' according to RFC3986.
+[2025-10-29T19:39:06.123+0000] {base.py:83} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2025-10-29T19:39:06.124+0000] {credentials_provider.py:353} INFO - Getting connection using `google.auth.default()` since no explicit credentials are provided.
+[2025-10-29T19:39:06.691+0000] {gcs.py:569} INFO - Data stream uploaded to rides/20251029T193906.json in laye2025 bucket
+[2025-10-29T19:39:06.692+0000] {dag2_elastic_gcs_ingestion.py:153} INFO - ✅ Donnée sauvegardée sur GCS: gs://laye2025/rides/20251029T193906.json
+[2025-10-29T19:39:06.692+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-10-29T19:39:06.710+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=dag2_kafka_elastic_gcs, task_id=PutGCP, execution_date=20251029T193800, start_date=20251029T193905, end_date=20251029T193906
+[2025-10-29T19:39:06.746+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-10-29T19:39:06.765+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
