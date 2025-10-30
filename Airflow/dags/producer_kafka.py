@@ -5,7 +5,7 @@ import random
 
 # Connexion au serveur Kafka
 producer = KafkaProducer(
-    bootstrap_servers=['127.0.0.1:9092'],
+    bootstrap_servers=['kafka:9092'],
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
@@ -23,7 +23,7 @@ def generate_ride():
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
     }
 
-topic = 'uber_source'
+topic = 'uber'
 
 while True:
     data = generate_ride()

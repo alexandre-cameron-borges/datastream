@@ -9,15 +9,20 @@ import math
 
 def consume_from_kafka(**context):
     consumer = KafkaConsumer(
-        'uber_source',
-        bootstrap_servers='192.168.240.1:9092',
+        'uber',
+        bootstrap_servers=['kafka:9092'],
         auto_offset_reset='earliest',
         group_id='airflow-group',
         value_deserializer=lambda m: json.loads(m.decode('utf-8'))
     )
+
+    print("📡 Attente d'un message Kafka...")
     for message in consumer:
-        context['ti'].xcom_push(key='kafka_message', value=message.value)
-        break
+        msg_value = message.value
+        print(f"✅ Message reçu : {msg_value}")
+        context['ti'].xcom_push(key='kafka_message', value=msg_value)
+        break  # on quitte après avoir reçu le premier vrai message
+
     consumer.close()
 
 def compute_cost_travel(**context):
@@ -45,7 +50,7 @@ def compute_cost_travel(**context):
 
 def publish_to_kafka(**context):
     producer = KafkaProducer(
-        bootstrap_servers='192.168.240.1:9092',
+        bootstrap_servers='kafka:9092',
         value_serializer=lambda m: json.dumps(m).encode('utf-8')
     )
     result = context['ti'].xcom_pull(key='result_message')
